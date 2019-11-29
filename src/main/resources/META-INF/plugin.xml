@@ -1,0 +1,28 @@
+<idea-plugin>
+    <id>org.gradle.gradle-intellij-fs-notifier</id>
+    <name>Gradle filesystem changes notifier</name>
+    <vendor email="wolf@gradle.com" url="https://gradle.org">Gradle Inc.</vendor>
+
+    <description><![CDATA[
+    Notifies Gradle about filesystem changes detected by Intellij
+    ]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>org.jetbrains.plugins.gradle</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+    <extensions defaultExtensionNs="org.jetbrains.plugins.gradle">
+        <projectResolve implementation="org.gradle.intellij.fs.notifier.NotifyingGradleProjectResolverExtension"/>
+    </extensions>
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+    <project-components>
+        <component>
+            <implementation-class>org.gradle.intellij.fs.notifier.GradleNotifier</implementation-class>
+        </component>
+    </project-components>
+</idea-plugin>

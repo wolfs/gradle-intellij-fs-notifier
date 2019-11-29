@@ -1,23 +1,21 @@
 package org.gradle.intellij.fs.notifier;
 
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.components.ProjectComponent;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.util.messages.MessageBusConnection;
 
-public class GradleNotifier implements ProjectComponent {
+public class GradleNotifier {
 
-    private final Project project;
+    private final NotifyGradleAboutFileChangeListener fileChangeListener;
 
-    public GradleNotifier(Project project) {
-        this.project = project;
+    public GradleNotifier() {
+        MessageBusConnection connection = ApplicationManager.getApplication().getMessageBus().connect();
+        fileChangeListener = new NotifyGradleAboutFileChangeListener();
+        connection.subscribe(VirtualFileManager.VFS_CHANGES, fileChangeListener);
     }
 
-    @Override
-    public void projectOpened() {
-        MessageBusConnection connection = ApplicationManager.getApplication().getMessageBus().connect();
-        connection.subscribe(VirtualFileManager.VFS_CHANGES, new NotifyGradleAboutFileChangeListener(project.getBasePath()));
+    public NotifyGradleAboutFileChangeListener getFileChangeListener() {
+        return fileChangeListener;
     }
 
     public static void printMessage(String path, String type) {

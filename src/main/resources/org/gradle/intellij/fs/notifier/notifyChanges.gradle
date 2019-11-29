@@ -1,0 +1,8 @@
+import org.gradle.internal.vfs.VirtualFileSystem
+
+List<String> changedLocations = ${CHANGED_LOCATIONS}
+
+println "Invalidating paths ${changedLocations.join(', ')}"
+
+def vfs = gradle.services.get(VirtualFileSystem)
+vfs.update(changedLocations) {}

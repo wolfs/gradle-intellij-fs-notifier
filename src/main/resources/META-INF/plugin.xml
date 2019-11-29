@@ -20,9 +20,9 @@
     <actions>
         <!-- Add your actions here -->
     </actions>
-    <project-components>
+    <application-components>
         <component>
             <implementation-class>org.gradle.intellij.fs.notifier.GradleNotifier</implementation-class>
         </component>
-    </project-components>
+    </application-components>
 </idea-plugin>

@@ -14,15 +14,12 @@
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
     </extensions>
-    <extensions defaultExtensionNs="org.jetbrains.plugins.gradle">
-        <projectResolve implementation="org.gradle.intellij.fs.notifier.NotifyingGradleProjectResolverExtension"/>
-    </extensions>
     <actions>
         <!-- Add your actions here -->
     </actions>
-    <application-components>
+    <project-components>
         <component>
             <implementation-class>org.gradle.intellij.fs.notifier.GradleNotifier</implementation-class>
         </component>
-    </application-components>
+    </project-components>
 </idea-plugin>
